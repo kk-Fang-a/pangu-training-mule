@@ -1,0 +1,33 @@
+#%RAML 1.0
+title: sys-api
+version: v1
+protocols:
+  - HTTP
+  - HTTPS
+mediaType: 
+  - application/json
+resourceTypes:
+  standard_type: !include exchange_modules/7f6a43c7-2acb-4e80-88b7-26cba0a5cb48/resource-type/1.0.0/resource-type.raml
+uses:
+  type_response_data_resultset: exchange_modules/7f6a43c7-2acb-4e80-88b7-26cba0a5cb48/type-response-data-resultset/1.0.0/type-response-data-resultset.raml
+  type_lib: exchange_modules/7f6a43c7-2acb-4e80-88b7-26cba0a5cb48/type-lib/1.0.0/type-lib.raml
+  type_accounts: types/type-accounts.raml
+
+/accounts:
+  type:
+    standard_type:
+      target_name: account
+      target_key_get: account id
+      response_body_get:
+        properties:
+          resultset:
+            type_response_data_resultset.type_response_data_resultset_only_count
+          results:
+            type_accounts.account_object[]
+  get:
+    queryParameters:
+      id:
+        type: type_lib.id[]
+        required: true
+        minItems: 1
+        maxItems: 200
