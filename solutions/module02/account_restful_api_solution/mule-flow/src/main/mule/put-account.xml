@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	<flow name="put_account_flow" doc:id="3520390c-952b-4e5b-8986-bbc273cf76ec" >
+		<logger level="INFO" doc:name="logger_request" doc:id="a5bc07d5-5b70-47d8-a380-f814415f2628" />
+		<set-payload value='{&#10;  "id": "a0M0w000000iFwYEAU",&#10;  "name": "株式会社Pangu",&#10;  "corporate_number": "株式会社Pangu",&#10;  "corporate_scale": "大企業"&#10;}' doc:name="set_result" doc:id="3338301f-5277-4792-972c-bfe20bccfcd6" />
+		<logger level="INFO" doc:name="logger_response" doc:id="7d98ae13-43f2-4b83-be12-cb768107907f" message="#[payload]"/>
+	</flow>
+</mule>
