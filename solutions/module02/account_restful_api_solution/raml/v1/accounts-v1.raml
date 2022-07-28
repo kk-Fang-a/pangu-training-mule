@@ -1,0 +1,29 @@
+#%RAML 1.0
+title: account
+version: 1.0
+
+/accounts:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+              properties:
+                id:
+                  type: string
+                  required: true
+                  example: "a0M0w000000iFwYEAU"
+                name:
+                  description: name of account
+                  type: string
+                  required: true
+                  example: 株式会社Pangu
+                corporate_number:
+                  type: string
+                  required: false
+                  example: "株式会社Pangu"
+                corporate_scale:
+                  description: scale of corporate
+                  type: string
+                  required: false
+                  example: 大企業
