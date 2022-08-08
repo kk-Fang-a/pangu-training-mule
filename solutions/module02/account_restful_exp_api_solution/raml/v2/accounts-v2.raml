@@ -1,0 +1,44 @@
+#%RAML 1.0
+title: account
+version: 1.0
+
+uses: 
+ type_account: /type-account.raml
+
+/accounts:
+  get:
+    description: Get a account list
+    responses:
+      200:
+        body:
+          application/json:
+              type_account.account_obejct
+  
+  post:
+    description: Create a new account
+    body:
+      application/json:
+        type_account.account_obejct
+    responses:
+      201:
+        body:
+          application/json:
+            type_account.account_obejct
+  /{id}:
+    put:
+      description: Update a account by id
+      body:
+        application/json:
+          type_account.account_obejct
+      responses:
+        200:
+          body:
+            application/json:
+              type_account.account_obejct
+    delete:
+      description: Delete a account by id
+      responses:
+        200:
+          body:
+            application/json:
+              type_account.account_obejct

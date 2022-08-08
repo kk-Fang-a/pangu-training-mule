@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	<flow name="get_accounts_flow" doc:id="05b2ec18-547c-4f0d-b573-a16966213fa1" >
+		<logger level="INFO" doc:name="logger_request" doc:id="a8868816-5d16-4b2d-99dd-e6a3e54ad00a" />
+		<set-variable value="0" doc:name="set_exit_code" doc:id="555b181d-4080-4a7a-a1cb-602abb37b0a2" variableName="exit_code"/>
+		<flow-ref doc:name="update_exit_code_subflow" doc:id="aff05e77-d4b3-47ec-8e3c-9a9a9d00345b" name="update_exit_code_subflow"/>
+		<set-payload value='{&#10;  "id": "a0M0w000000iFwYEAU",&#10;  "name": "株式会社Pangu",&#10;  "corporate_number": "株式会社Pangu",&#10;  "corporate_scale": "大企業"&#10;}' doc:name="set_result" doc:id="09314e46-fb5e-4b61-a223-857a9bb1d212" />
+		<logger level="INFO" doc:name="logger_response" doc:id="072ee91b-11cd-4724-88d3-0bdd149475b2" message="#[payload]"/>
+	</flow>
+	<sub-flow name="update_exit_code_subflow" doc:id="e4fbf68b-ad8d-4f3c-ad35-2aab1f292558" >
+		<set-variable value="1" doc:name="update_exit_code" doc:id="4f9f2f18-727d-4e63-91fb-9b9d4fcc2649" variableName="exit_code"/>
+		<logger level="INFO" doc:name="logger_exit_code" doc:id="644e68ff-4266-4542-bf2f-b5210e0175e0" message="#[vars.exit_code]"/>
+	</sub-flow>
+</mule>

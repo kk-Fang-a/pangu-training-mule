@@ -1,0 +1,30 @@
+#%RAML 1.0
+title: American Flights API
+
+types:
+  AmericanFlight: !include /exchange_modules/68ef9520-24e9-4cf2-b2f5-620025690913/training-american-flight-data-type/1.0.1/AmericanFlightDataType.raml
+
+/file-content:
+  description: The file to be reproduced by the client
+  get:
+    description: Get the file content
+    responses:
+      200:
+        body:
+          binary/octet-stream:
+            example: "010110"
+  post:
+    description: |
+      Enters the file content for an existing song entity.
+
+      Use the "binary/octet-stream" content type to specify the content from any consumer (excepting web-browsers).
+      Use the "multipart-form/data" content type to upload a file which content will become the file-content
+    body:
+      binary/octet-stream:
+      multipart/form-data:
+        properties:
+          file:
+            description: The file to be uploaded
+            required: true
+            type: file
+

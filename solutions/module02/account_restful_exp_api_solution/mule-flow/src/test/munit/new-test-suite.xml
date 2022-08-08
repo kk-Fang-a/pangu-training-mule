@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="new-test-suite.xml" />
+	<munit:test name="new-test-suite-get_accounts_flowTest" doc:id="cfd908a9-105a-440b-ae13-080eca988019" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get_accounts_flow" doc:id="deaa2f95-375a-4b02-a4c1-44a6e737ad70" name="delete_account_flow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="94b5d082-5800-49bc-b6bf-3c89ab4e7249" expression="#[payload]" is="#[MunitTools::equalTo('Delete success!')]" message="Assert Failed"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="new-test-suite-update_exit_code_subflowTest" doc:id="2a852343-68e1-4b21-9e38-d074a09701ae" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to update_exit_code_subflow" doc:id="800c2b3e-f5f6-4e49-97fb-87d6d06d6446" name="update_exit_code_subflow"/>
+		</munit:execution>
+	</munit:test>
+
+</mule>
