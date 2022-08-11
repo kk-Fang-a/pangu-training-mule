@@ -1,29 +1,39 @@
 #%RAML 1.0
-title: account
-version: 1.0
+title: exp-api
 
 /accounts:
+  description: Collection of available accounts in sfdc
   get:
+    description: Get a list of accounts based on the accounts name.
+    queryParameters:
+      industry:
+        required: true
+        type: string
+        example: "IT"
     responses:
       200:
         body:
           application/json:
-              properties:
-                id:
-                  type: string
-                  required: true
-                  example: "a0M0w000000iFwYEAU"
-                name:
-                  description: name of account
-                  type: string
-                  required: true
-                  example: 株式会社Pangu
-                corporate_number:
-                  type: string
-                  required: false
-                  example: "株式会社Pangu"
-                corporate_scale:
-                  description: scale of corporate
-                  type: string
-                  required: false
-                  example: 大企業
+            example: |
+              {
+                "results": [
+                  {
+                    "name": "A株式会社",
+                    "industry": "IT",
+                    "employees": "100"
+                    "phone": "080-3333-5555"
+                  },
+                  {
+                    "name": "B株式会社",
+                    "Industry": "IT",
+                    "employees": "120"
+                    "phone": "080-2222-1111"
+                  },
+                  {
+                    "name": "C株式会社",
+                    "Industry": "IT",
+                    "employees": "140"
+                    "phone": "080-5555-7777"
+                  }
+                ]
+              }
