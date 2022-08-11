@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<salesforce:sfdc-config name="Salesforce_Config" doc:name="Salesforce Config" doc:id="0d379be5-16cb-49ad-9b9b-a35256c6c09b" >
+		<salesforce:basic-connection username="kikou_fang@gmail.com" password="Kobebryant4" securityToken="TsB8PSg8ZzgTUj3TClR9Szv9" url="https://login.salesforce.com/services/Soap/u/54.0"/>
+	</salesforce:sfdc-config>
+	<flow name="get_accounts_flow" doc:id="7ce40ea2-ebe2-46df-af90-5090f5fca664" >
+		<salesforce:query doc:name="Query" doc:id="becf5809-0a6d-40a8-aff2-7ca5de460646" config-ref="Salesforce_Config">
+			<salesforce:salesforce-query ><![CDATA[SELECT
+ Id, 
+ Name, 
+ BillingCity 
+FROM 
+ Account
+WHERE
+ :where]]></salesforce:salesforce-query>
+			<salesforce:parameters ><![CDATA[#[output application/java
+---
+{
+	"where" : "Industry = 'Apparel'"
+}]]]></salesforce:parameters>
+		</salesforce:query>
+		<ee:transform doc:name="Transform Message" doc:id="8fb4799e-6550-4392-803d-30cb833f6c95" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"results": payload map(payload01, indexOfPayload01) -> {
+		"name": payload01.Name,
+		"industry": payload01.Industry,
+		"employees": payload01.NumberOfEmployees,
+		"phone": payload01.Phone
+	}
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>
